@@ -2,7 +2,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class StorageService {
   StorageService({FlutterSecureStorage? secureStorage})
-    : _secureStorage = secureStorage ?? const FlutterSecureStorage();
+      : _secureStorage = secureStorage ?? const FlutterSecureStorage();
 
   final FlutterSecureStorage _secureStorage;
 
@@ -12,4 +12,7 @@ class StorageService {
       _secureStorage.write(key: key, value: value);
 
   Future<void> delete(String key) => _secureStorage.delete(key: key);
+
+  Future<void> deleteAll() => _secureStorage.deleteAll();
 }
+
