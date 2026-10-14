@@ -19,19 +19,12 @@ class AuthenticationView extends GetView<AuthenticationController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Icon(
-                    Icons.local_hospital,
-                    size: 80,
-                    color: Colors.red,
-                  ),
+                  const Icon(Icons.local_hospital, size: 80, color: Colors.red),
                   const SizedBox(height: 16),
                   const Text(
                     'Ambulance Driver',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   const Text(
@@ -41,7 +34,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
                   ),
                   const SizedBox(height: 40),
                   _buildErrorBanner(),
-                  _buildEmailField(),
+                  _buildPhoneField(),
                   const SizedBox(height: 16),
                   _buildPasswordField(),
                   const SizedBox(height: 24),
@@ -76,23 +69,18 @@ class AuthenticationView extends GetView<AuthenticationController> {
     });
   }
 
-  Widget _buildEmailField() {
+  Widget _buildPhoneField() {
     return TextFormField(
-      controller: controller.emailController,
-      keyboardType: TextInputType.emailAddress,
+      controller: controller.phoneController,
+      keyboardType: TextInputType.phone,
       decoration: InputDecoration(
-        labelText: 'Email',
-        prefixIcon: const Icon(Icons.email_outlined),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        labelText: 'Phone number',
+        prefixIcon: const Icon(Icons.phone_outlined),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter your email';
-        }
-        if (!GetUtils.isEmail(value)) {
-          return 'Please enter a valid email';
+          return 'Please enter your phone number';
         }
         return null;
       },
@@ -101,7 +89,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
 
   Widget _buildPasswordField() {
     return Obx(
-          () => TextFormField(
+      () => TextFormField(
         controller: controller.passwordController,
         obscureText: !controller.isPasswordVisible.value,
         decoration: InputDecoration(
@@ -115,9 +103,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
             ),
             onPressed: controller.togglePasswordVisibility,
           ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -134,7 +120,7 @@ class AuthenticationView extends GetView<AuthenticationController> {
 
   Widget _buildSignInButton() {
     return Obx(
-          () => ElevatedButton(
+      () => ElevatedButton(
         onPressed: controller.isLoading.value ? null : controller.login,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,
@@ -146,19 +132,15 @@ class AuthenticationView extends GetView<AuthenticationController> {
         ),
         child: controller.isLoading.value
             ? const SizedBox(
-          height: 20,
-          width: 20,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          ),
-        )
-            : const Text(
-          'Sign In',
-          style: TextStyle(fontSize: 16),
-        ),
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : const Text('Sign In', style: TextStyle(fontSize: 16)),
       ),
     );
   }
 }
-
